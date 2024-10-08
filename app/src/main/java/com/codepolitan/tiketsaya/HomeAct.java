@@ -12,13 +12,15 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.github.florent37.shapeofview.shapes.CircleView;
+import com.codepolitan.tiketsaya.sample.FirebaseStructureFetcher;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
+
+import io.github.florent37.shapeofview.shapes.CircleView;
 
 public class HomeAct extends AppCompatActivity {
     LinearLayout btn_ticket_pisa, btn_ticket_torri,
@@ -54,7 +56,8 @@ public class HomeAct extends AppCompatActivity {
         nama_lengkap = findViewById(R.id.nama_lengkap);
         bio = findViewById(R.id.bio);
         user_balance = findViewById(R.id.user_balance);
-
+        FirebaseStructureFetcher fetcher = new FirebaseStructureFetcher();
+        fetcher.fetchDatabaseStructure();
         //mengambil data berdasarkan user yang sedang login username_key_new
         Toast.makeText(this, username_key_new, Toast.LENGTH_SHORT).show();
         reference = FirebaseDatabase.getInstance().getReference().child("Users").child(username_key_new);

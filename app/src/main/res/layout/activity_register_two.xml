@@ -81,7 +81,7 @@ more better and ever"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.github.florent37.shapeofview.shapes.CircleView
+            <io.github.florent37.shapeofview.shapes.CircleView
                 android:id="@+id/imageView4"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
@@ -98,7 +98,7 @@ more better and ever"
                     android:layout_width="90dp"
                     android:layout_height="90dp"
                     android:src="@drawable/icon_nopic"/>
-            </com.github.florent37.shapeofview.shapes.CircleView>
+            </io.github.florent37.shapeofview.shapes.CircleView>
 
             <Button
                 android:id="@+id/btn_add_photo"

@@ -19,6 +19,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class SignInAct extends AppCompatActivity {
     Button btn_sign_in;
     TextView btn_new_account;
@@ -40,7 +43,6 @@ public class SignInAct extends AppCompatActivity {
         xusername = findViewById(R.id.xusername);
         xpassword = findViewById(R.id.xpassword);
 
-
         btn_new_account.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,8 +60,11 @@ public class SignInAct extends AppCompatActivity {
                 btn_sign_in.setEnabled(false);
                 btn_sign_in.setText("Loading ...");
 
-                final String username = xusername.getText().toString();
-                final String password = xpassword.getText().toString();
+//                final String username = xusername.getText().toString();
+//                final String password = xpassword.getText().toString();
+
+                final String username = "Asep Suparjo";
+                final String password = "12345";
 
                 if (username.isEmpty()) {
                     //jika password tidak sesuai
@@ -72,9 +77,29 @@ public class SignInAct extends AppCompatActivity {
                         //jika password tidak sesuai
                         Toast.makeText(getApplicationContext(), "Password Kosong", Toast.LENGTH_SHORT).show();
                         btn_sign_in.setEnabled(true);
-                        btn_sign_in.setText("SIGN IN");
+                        btn_sign_in.setText("SIGN IN");//Anggit  anngit
                     } else {
                         //cek verifikasi ke database
+                        DatabaseReference userFirebases = FirebaseDatabase.getInstance().getReference().child("Users");
+                        userFirebases.addListenerForSingleValueEvent(
+                                new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(DataSnapshot dataSnapshot) {
+                                        List<String> users = new ArrayList<>();
+                                        for (DataSnapshot userSnapshot : dataSnapshot.getChildren()) {
+                                            String username = userSnapshot.getKey();
+                                            users.add(username);
+                                        }
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        Toast.makeText(getApplicationContext(), "Database Error!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                        );
                         references = FirebaseDatabase.getInstance().getReference().child("Users").child(username);
                         references.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -90,7 +115,7 @@ public class SignInAct extends AppCompatActivity {
                                         //Menyimpan data kepada local storage (HP)
                                         SharedPreferences sharedPreferences = getSharedPreferences(USERNAME_KEY, MODE_PRIVATE);
                                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                                        editor.putString(username_key, xusername.getText().toString());
+                                        editor.putString(username_key, username);
                                         editor.apply();
 
                                         Intent goToHome = new Intent(SignInAct.this, HomeAct.class);

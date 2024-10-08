@@ -30,7 +30,7 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.github.florent37.shapeofview.shapes.CircleView
+    <io.github.florent37.shapeofview.shapes.CircleView
         android:id="@+id/frame_photo_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
             android:id="@+id/photo_profile"
             android:src="@drawable/icon_nopic"
             />
-    </com.github.florent37.shapeofview.shapes.CircleView>
+    </io.github.florent37.shapeofview.shapes.CircleView>
 
     <TextView
         android:id="@+id/nama_lengkap"
@@ -83,7 +83,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="18dp"></Button>
+        android:layout_marginTop="18dp" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
