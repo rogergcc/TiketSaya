@@ -52,7 +52,7 @@ public class TicketDetailAct extends AppCompatActivity {
 
         //mengambil data dari intent
         Bundle bundle = getIntent().getExtras();
-        final String jenis_tiket_baru = bundle.getString("jenis_tiket");
+        final String jenis_tiket_baru = bundle.getString("jenis_tiket");//TODO ERRO CHECK FIREBASE
 
 
         //mengambil data dari firebase berdasarkan intent

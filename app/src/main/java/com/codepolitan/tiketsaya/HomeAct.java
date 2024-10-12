@@ -12,7 +12,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codepolitan.tiketsaya.sample.FileHelper;
+import com.codepolitan.tiketsaya.sample.FirebaseService;
 import com.codepolitan.tiketsaya.sample.FirebaseStructureFetcher;
+import com.codepolitan.tiketsaya.sample.JsonBuilder;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -43,6 +46,15 @@ public class HomeAct extends AppCompatActivity {
 
         getUsernameLocal();
 
+        FileHelper fileHelper = new FileHelper(this);
+        FirebaseService firebaseService = new FirebaseService();
+        JsonBuilder jsonBuilder = new JsonBuilder();
+
+        FirebaseStructureFetcher fetcher = new FirebaseStructureFetcher(fileHelper, firebaseService, jsonBuilder);
+
+        fetcher.fetchDatabaseStructure();
+
+
         btn_ticket_pisa = findViewById(R.id.btn_ticket_pisa);
         btn_ticket_torri = findViewById(R.id.btn_ticket_torri);
         btn_ticket_pagoda = findViewById(R.id.btn_ticket_pagoda);
@@ -56,8 +68,6 @@ public class HomeAct extends AppCompatActivity {
         nama_lengkap = findViewById(R.id.nama_lengkap);
         bio = findViewById(R.id.bio);
         user_balance = findViewById(R.id.user_balance);
-        FirebaseStructureFetcher fetcher = new FirebaseStructureFetcher();
-        fetcher.fetchDatabaseStructure();
         //mengambil data berdasarkan user yang sedang login username_key_new
         Toast.makeText(this, username_key_new, Toast.LENGTH_SHORT).show();
         reference = FirebaseDatabase.getInstance().getReference().child("Users").child(username_key_new);
